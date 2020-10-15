@@ -60,9 +60,13 @@ public class SpringEchoApp {
 		responseMap.put("cookies", request.getCookies());
 		responseMap.put("parameters", request.getParameterMap());
 		responseMap.put("path", request.getServletPath());
+		responseMap.put("echo_version", System.getProperty("echo_version", "v0"));
 		responseMap.put("body", rawBody != null ? Base64.getEncoder().encodeToString(rawBody) : null);
 		LOG.info("REQUEST: " + request.getParameterMap());
-
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseMap);
+		if (!System.getProperty("echo_buggy", "").equals("") && request.getServletPath().equals("/give404")) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseMap);
+		} else {
+			return ResponseEntity.status(HttpStatus.OK).body(responseMap);
+		}
 	}	
 }
