@@ -23,7 +23,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'org.springframework.boot'
 
-version = '1.1.0'
+version = '1.2.0'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -36,6 +36,7 @@ repositories {
 dependencies {
     // Spring Boot, use Jetty instead of default Tomcat
     // https://medium.com/code-your-life/use-jetty9-with-spring-boot-and-gradle-85a1127c919f 
+    compile 'io.opentracing.contrib:opentracing-spring-jaeger-web-starter:0.1.5'
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile 'io.micrometer:micrometer-registry-prometheus:latest.release'
     compile 'io.micrometer:micrometer-spring-legacy:latest.release'
